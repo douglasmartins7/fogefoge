@@ -1,4 +1,7 @@
+
+
 def le_mapa(numero)
-    texto = File.read("mapa#{numero}.txt")
+    arquivo = "mapa#{numero}.txt"
+    texto = File.read(arquivo)
     mapa = texto.split("\n")
 end
