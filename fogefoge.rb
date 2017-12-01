@@ -12,6 +12,10 @@ def joga(nome)
     while true
         desenha mapa
         direcao = pede_movimento
+        heroi = encontra_jogador mapa
+        mapa[heroi[0]][heroi[1]] = " "
+        nova_posicao = calcula_nova_posicao heroi, direcao
+        mapa[nova_posicao[0]][nova_posicao[1]] = "H"
     end
 end
 
@@ -20,28 +24,42 @@ def inicia_fogefoge
     joga nome
 end
 
+# def encontra_jogador(mapa)
+#     caracter_do_heroi = "H"
+#     #for linha in 0..(mapa.size -1)
+#     for linha in 0..(mapa.size -1)
+#         linha_atual = mapa[linha]
+#         coluna_do_heroi = linha_atual.index caracter_do_heroi
+#         if coluna_do_heroi
+#             #achei
+#         end
+#     end
+#     #não achei
+# end
+
 def encontra_jogador(mapa)
     caracter_do_heroi = "H"
-    #for linha in 0..(mapa.size -1)
-    for linha = 0..(mapa.size -1)
-        linha_atual = mapa[linha]
+    mapa.each_with_index do |linha_atual, linha|
         coluna_do_heroi = linha_atual.index caracter_do_heroi
         if coluna_do_heroi
-            #achei
+            return [linha, coluna_do_heroi]
         end
     end
-    #não achei
+    # não achei!
 end
 
-def encontra_jogador(mapa)
-    caracter_do_heroi = "H"
-    mapa.each do |linha_atual|
-        #cade a linha
-        coluna_do_heroi = linha_atual.index caracter_do_heroi
-        if coluna_do_heroi != - 1
-        #achei!
+def calcula_nova_posicao(heroi, direcao)
+    case direcao
+        when "W"
+            heroi[0] -= 1
+        when "S"
+            heroi[0] += 1
+        when "A"
+            heroi[1] -= 1
+        when "D"
+            heroi[1] += 1
         end
-    end    
-    #não achei
+        heroi
 end
 
+#Laço funcional básico
